@@ -43,6 +43,9 @@ export default {
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
+        generator: {
+          filename: "fonts/[name][ext]",
+        },
       },
     ],
   },
@@ -58,6 +61,7 @@ export default {
     port: 3000,
     hot: true,
     open: true,
+    historyApiFallback: true,
   },
   devtool: "source-map",
 };
