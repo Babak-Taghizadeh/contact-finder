@@ -1,0 +1,33 @@
+@use "sass:map";
+@use "variables";
+
+@mixin respond-to($breakpoint) {
+  @media (min-width: map.get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+@mixin grid-layout($columns, $breakpoint: null, $responsive-columns: null) {
+  & {
+    grid-template-columns: repeat($columns, 1fr);
+  }
+
+  @if $breakpoint and $responsive-columns {
+    @include respond-to($breakpoint) {
+      & {
+        grid-template-columns: repeat($responsive-columns, 1fr);
+      }
+    }
+  }
+}
+
+@mixin flex-center($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin border-style($color, $radius) {
+  border: solid 1px $color;
+  border-radius: $radius;
+}
