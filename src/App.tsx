@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
+import { MainLayout } from "./components/layout/main-layout";
 
 const App = () => {
   return (
-    <div>
+    <MainLayout>
       <Outlet />
-    </div>
+    </MainLayout>
   );
 };
 
