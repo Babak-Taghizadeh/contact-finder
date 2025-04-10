@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Contact } from "@/types/types";
 import "./contact-list.scss";
+import { memo } from "react";
 
 interface ContactCardProps {
   contact: Contact;
@@ -38,4 +39,4 @@ const ContactCard = ({ contact }: ContactCardProps) => {
   );
 };
 
-export default ContactCard;
+export default memo(ContactCard);
