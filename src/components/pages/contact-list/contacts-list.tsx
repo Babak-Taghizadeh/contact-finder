@@ -1,10 +1,26 @@
 import { useInfiniteContacts } from "@/hooks/use-infinite-contacts";
 import ContactCard from "./contact-card";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import { throttle } from "lodash-es";
 
 const ContactsList = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteContacts();
+
+  const throttledFetch = useCallback(
+    throttle(() => {
+      if (hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    }, 500),
+    [fetchNextPage, hasNextPage, isFetchingNextPage]
+  );
+
+  useEffect(() => {
+    return () => {
+      throttledFetch.cancel();
+    };
+  }, [throttledFetch]);
 
   const observer = useRef<IntersectionObserver | null>(null);
   const lastElementRef = useCallback(
@@ -12,17 +28,21 @@ const ContactsList = () => {
       if (isFetchingNextPage) return;
       if (observer.current) observer.current.disconnect();
 
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasNextPage) {
-          fetchNextPage();
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            throttledFetch();
+          }
+        },
+        {
+          rootMargin: "200px",
         }
-      });
+      );
 
       if (node) observer.current.observe(node);
     },
-    [fetchNextPage, hasNextPage, isFetchingNextPage]
+    [throttledFetch, isFetchingNextPage]
   );
-
   const contacts = data?.pages.flatMap((page) => page.items) || [];
   if (status === "pending") {
     return <div>Loading initial data...</div>;
