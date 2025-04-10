@@ -2,6 +2,13 @@
 @use "../../../styles/mixins" as *;
 @use "sass:color";
 
+.contacts-container {
+  display: grid;
+  gap: 1rem;
+  @include grid-layout(null, "sm", 2);
+  @include grid-layout(null, "lg", 3);
+}
+
 .contact-card {
   @include flex-center(flex-start, center);
   @include border-style($border-color, $border-radius);
