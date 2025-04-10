@@ -1,3 +1,4 @@
+import "./contact-list.scss";
 import { useInfiniteContacts } from "@/hooks/use-infinite-contacts";
 import ContactCard from "./contact-card";
 import { useCallback, useEffect, useRef } from "react";

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Contact } from "@/types/types";
-import "./contact-list.scss";
 import { memo } from "react";
 
 interface ContactCardProps {
