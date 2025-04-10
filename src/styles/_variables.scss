@@ -1,0 +1,16 @@
+$breakpoints: (
+  "sm": 640px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1280px,
+  "2xl": 1420px,
+);
+
+$primary-color: #00d170;
+$secondary-color: #58c0f9;
+$text-color: #374151;
+$light-gray: #f3f4f6;
+$border-color: #e5e7eb;
+$border-radius: 0.5rem;
+$box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+$transition: all 0.3s ease-in-out;
