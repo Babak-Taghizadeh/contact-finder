@@ -13,7 +13,7 @@ const ContactCard = ({ contact }: ContactCardProps) => {
 
   return (
     <Link
-      to={`/contacts//${contact.id}`}
+      to={`/contacts/${contact.id}`}
       className="contact-card"
       onClick={handleInteraction}
     >
