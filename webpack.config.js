@@ -10,6 +10,7 @@ export default {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[contenthash].js",
     clean: true,
+    publicPath: "/",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
