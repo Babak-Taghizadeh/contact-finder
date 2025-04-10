@@ -114,6 +114,7 @@
 
       &.notes-section {
         .note-text {
+          width: 40rem;
           white-space: pre-line;
           line-height: 1.6;
           color: color.adjust($text-color, $lightness: -5%);
