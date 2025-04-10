@@ -35,7 +35,7 @@
   min-height: 100vh;
   &__content {
     flex: 1;
-    padding: 2rem 0;
+    padding: 1.5rem 1rem;
     @include respond-to("lg") {
       padding: 2rem 8rem;
     }
