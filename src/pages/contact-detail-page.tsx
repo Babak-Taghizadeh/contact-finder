@@ -1,5 +1,13 @@
+import BackButton from "@/components/pages/contact-detail/back-button";
+import ContactDetail from "@/components/pages/contact-detail/contact-detail";
+
 const ContactDetailPage = () => {
-  return <div>ContactDetailPage</div>;
+  return (
+    <>
+      <BackButton />
+      <ContactDetail />
+    </>
+  );
 };
 
 export default ContactDetailPage;
