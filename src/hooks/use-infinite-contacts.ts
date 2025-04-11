@@ -32,9 +32,13 @@ export const useInfiniteContacts = ({
       if (searchQuery) {
         queryParams.sort = "createdAt DESC";
 
-        queryParams.where = JSON.stringify({
-          last_name: { contains: searchQuery },
-        });
+        const isPhoneSearch = /^\d/.test(searchQuery);
+
+        queryParams.where = JSON.stringify(
+          isPhoneSearch
+            ? { phone: { contains: searchQuery } }
+            : { last_name: { contains: searchQuery } }
+        );
       }
 
       return getRequest<ContactResponse>("passenger", {
