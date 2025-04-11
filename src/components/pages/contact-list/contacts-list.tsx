@@ -1,53 +1,23 @@
 import "./contact-list.scss";
 import { useInfiniteContacts } from "@/hooks/use-infinite-contacts";
 import ContactCard from "./contact-card";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import SearchField from "./search-field";
-
-import { throttle } from "lodash-es";
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 
 const ContactsList = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteContacts({ searchQuery });
 
-  const throttledFetch = useCallback(
-    throttle(() => {
-      if (hasNextPage && !isFetchingNextPage) {
-        fetchNextPage();
-      }
-    }, 500),
-    [fetchNextPage, hasNextPage, isFetchingNextPage]
-  );
+  const { lastElementRef } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
 
-  useEffect(() => {
-    return () => {
-      throttledFetch.cancel();
-    };
-  }, [throttledFetch]);
-
-  const observer = useRef<IntersectionObserver | null>(null);
-  const lastElementRef = useCallback(
-    (node: HTMLDivElement) => {
-      if (isFetchingNextPage) return;
-      if (observer.current) observer.current.disconnect();
-
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting) {
-            throttledFetch();
-          }
-        },
-        {
-          rootMargin: "200px",
-        }
-      );
-
-      if (node) observer.current.observe(node);
-    },
-    [throttledFetch, isFetchingNextPage]
-  );
   const contacts = data?.pages.flatMap((page) => page.items) || [];
+
   if (status === "pending") {
     return <div>Loading initial data...</div>;
   }
@@ -55,6 +25,7 @@ const ContactsList = () => {
   if (status === "error") {
     return <div>Error loading contacts</div>;
   }
+
   return (
     <div className="contacts-wrapper">
       <h2>Contacts</h2>
