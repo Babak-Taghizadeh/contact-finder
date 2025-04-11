@@ -1,12 +1,15 @@
 import "./contact-list.scss";
 import { useInfiniteContacts } from "@/hooks/use-infinite-contacts";
 import ContactCard from "./contact-card";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import SearchField from "./search-field";
+
 import { throttle } from "lodash-es";
 
 const ContactsList = () => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
-    useInfiniteContacts();
+    useInfiniteContacts({ searchQuery });
 
   const throttledFetch = useCallback(
     throttle(() => {
@@ -53,18 +56,27 @@ const ContactsList = () => {
     return <div>Error loading contacts</div>;
   }
   return (
-    <div className="contacts-container">
-      {contacts.map((contact, index) => {
-        return (
+    <div className="contacts-wrapper">
+      <h2>Contacts</h2>
+      <SearchField onSearch={setSearchQuery} initialValue={searchQuery} />
+      <div className="contacts-wrapper__grid">
+        {contacts.map((contact, index) => (
           <div
             ref={index === contacts.length - 1 ? lastElementRef : null}
             key={`${contact.id}-${index}`}
           >
             <ContactCard contact={contact} />
           </div>
-        );
-      })}
-      {isFetchingNextPage && <div>Loading more contacts...</div>}
+        ))}
+        {isFetchingNextPage && <div>Loading more contacts...</div>}
+        {contacts.length === 0 && !isFetchingNextPage && (
+          <div className="no-results">
+            {searchQuery
+              ? "No matching contacts found"
+              : "No contacts available"}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
