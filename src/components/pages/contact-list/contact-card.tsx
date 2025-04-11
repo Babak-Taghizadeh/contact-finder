@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import { Contact } from "@/types/types";
 import { memo } from "react";
+import { useRecentContacts } from "@/hooks/use-recent-contacts";
 
 interface ContactCardProps {
   contact: Contact;
 }
 
 const ContactCard = ({ contact }: ContactCardProps) => {
+  const { addRecentContact } = useRecentContacts();
+
   const handleInteraction = () => {
-    console.log("test");
+    addRecentContact(contact);
   };
 
   return (
