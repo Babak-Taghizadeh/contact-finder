@@ -8,7 +8,7 @@ export default {
   entry: "./src/main.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[contenthash].js",
+    filename: "bundle.[contenthash].js",
     clean: true,
     publicPath: "/",
   },
