@@ -1,9 +1,49 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@use "shared";
+@use "mixins" as *;
+@use "variables" as *;
+
+.header {
+  background-color: $primary-color;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
 }
 
-body {
-  background-color: rgb(197, 100, 100);
+.footer {
+  background-color: $light-gray;
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid $border-color;
+  width: 100%;
+  margin-top: auto;
+
+  p {
+    color: $text-color;
+    font-size: 0.7rem;
+  }
+}
+
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 1;
+    padding: 1.5rem 1rem;
+    @include respond-to("lg") {
+      padding: 2rem 8rem;
+    }
+    @include respond-to("2xl") {
+      padding: 2rem 12rem;
+    }
+  }
 }
