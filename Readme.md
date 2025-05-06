@@ -1,4 +1,4 @@
- 📇 Snapp Pay Contact List
+📇 Contacts List
 
 A React project built from scratch using Webpack and Babel. It features infinite scrolling, search functionality, and a clean component structure.
 
@@ -47,6 +47,7 @@ npm start
 ```
 
 Open your browser and go to http://localhost:3000
+
 # 🔍 Features
 
     🔁 Infinite scrolling with React Query
