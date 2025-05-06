@@ -16,13 +16,6 @@ A React project built from scratch using Webpack and Babel. It features infinite
 
 ---
 
-## 📂 Project Structure
-
-. ├── backend/ # Backend API (should run on localhost:1337) ├── frontend/ # Frontend React application │ ├── components/ # UI components like ContactCard, SearchField │ ├── hooks/ # Custom hooks (useInfiniteScroll, useDebounce) │ ├── styles/ # SASS styling │ ├── utils/ # Axios helpers, query functions │ ├── App.tsx # Main App component │ ├── index.tsx # Entry point │ └── ... # Config files for Webpack and Babel
-
-
----
-
 ## 🛠️ Getting Started
 
 ### 1. Clone the repository
