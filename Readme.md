@@ -21,8 +21,8 @@ A React project built from scratch using Webpack and Babel. It features infinite
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Babak-Taghizadeh/snapp-contacts-assignment.git
-cd snapp-pay-assignment
+git clone https://github.com/Babak-Taghizadeh/contact-finder.git
+cd contact-finder
 ```
 
 2. Start the backend server
@@ -41,7 +41,7 @@ In a new terminal:
 
 ```bash
 
-cd snapp-contacts-assignment
+cd contact-finder
 npm install
 npm start
 ```
